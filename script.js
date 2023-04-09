@@ -3,7 +3,7 @@ var now = dayjs();
 $(document).ready(function () {
 
   //Add the current date with hour to page header
-  $('#currentDay').text(now.format('MM/DD/YY h:mm:ss A'));
+  $('#currentDay').text(now.format('MM/DD/YY HH:mm:ss A'));
 
   loadHoursLayout();
 
@@ -30,10 +30,11 @@ $(document).ready(function () {
 
 //function that loads all the lay outs and adds the corresponding ids and classes (present,future,past)
 function loadHoursLayout() {
-  var currentHour = now.format('h');
+  var currentHour = now.format('HH');
 
   //for each loop to generate all the blocks of of the hours, adding the class present, future or past depending on the current hour.
   workHours.forEach(hour => {
+    console.log(hour + ' current hour ' + currentHour);
     $("#time-blocks").append(`<div id="${hour}" class="row time-block ${hour == currentHour ? ` present` : hour < currentHour ? ` past` : ` future`}">
         <div class="col-2 col-md-1 hour text-center py-3">${hour < 12 ? hour + ` AM` : hour === 12 ? hour + ` PM` : (hour - 12) + ` PM`}  </div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
